@@ -18,21 +18,8 @@ import TextField from 'material-ui/TextField';
 
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
-
-const customContentStyle = {
-  'width': '429px',
-  'height': '531px',
-};
-
-const customTitleStyle = {
-  'width': '264px',
-  'height': '23px',
-  fontSize: '18px',
-  'color': 'rgb(57, 57, 57)',
-  'margin': 'auto',
-  textAlign: 'center',
-  fontWeight: 'regular',
-};
+import PROJECT_TYPES from '../util/Constants'
+import CONTRACT_VALUES from '../util/Constants'
 
 const items = [
   <MenuItem key={1} value={1} primaryText="Never" />,
@@ -66,7 +53,7 @@ class Home extends Component {
       open: false,
       projectType: null,
       projectDescription: '',
-      contractSize: null,
+      contractValue: null,
       location: '',
     }
     this.handlerExample = this.handlerExample.bind(this);
@@ -87,13 +74,17 @@ class Home extends Component {
   handleProjectTypeChange = (event, index, value) => {
     this.setState({ projectType: value });
   };
-
-  handleContractSizeChange = (event, index, value) => {
-    this.setState({ contractSize: value });
-  };
-
+  
   handleProjectDescriptionChange = (event, index, value) => {
     this.setState({ projectDescription: event.target.value });
+  };
+
+  handleContractValueChange = (event, index, value) => {
+    this.setState({ contractValue: value });
+  };
+
+  handleLocationChange = (event, index, value) => {
+    this.setState({ location: event.target.value });
   };
 
   handlerExample() {
@@ -105,9 +96,46 @@ class Home extends Component {
   //-------------------------------------------------------------------------
   
   render() {
+    const styles = {
+      uploadButton: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+      uploadInput: {
+        cursor: 'pointer',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        width: '100%',
+        opacity: 0,
+      },
+      flatButton: {
+        marginLeft: 0,
+        marginRight: 'auto',
+        display: 'block',
+      }, 
+      customContentStyle: {
+        'width': '429px',
+        'height': '531px',
+      },
+      customTitleStyle: {
+        'width': '264px',
+        'height': '23px',
+        fontSize: '18px',
+        'color': 'rgb(57, 57, 57)',
+        'margin': 'auto',
+        textAlign: 'center',
+        fontWeight: 'regular',
+      }
+    };
+
     const actions = [
       <FlatButton
-        label="Ok"
+        style={styles.flatButton}
+        label="Submit"
         primary={true}
         keyboardFocused={true}
         onClick={this.handleClose}
@@ -123,16 +151,24 @@ class Home extends Component {
         <button onClick={this.handleOpen}>Create Project</button>
 
         <div>
-          {/* <RaisedButton label="Dialog With Date Picker" onClick={this.handleOpen} /> */}
           <Dialog
-            title="Add a project you've worked"
+            title="Add a project you've worked on"
             actions={actions}
             modal={false}
-            contentStyle={customContentStyle}
-            titleStyle={customTitleStyle}
+            contentStyle={styles.customContentStyle}
+            titleStyle={styles.customTitleStyle}
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
+            <FlatButton
+              label="Upload photos"
+              labelPosition="before"
+              containerElement="label"
+              style={styles.uploadButton}
+            >
+              <input type="file" style={styles.uploadInput}/>
+            </FlatButton>
+
             <SelectField
               value={this.state.projectType}
               onChange={this.handleProjectTypeChange}
@@ -140,29 +176,35 @@ class Home extends Component {
               fullWidth={true}
             >
               {items}
-            </SelectField><br />
+            </SelectField><br /><br />
 
             <TextField
               hintText="Add a project description"
               id="text-field-controlled"
-              fullWidth={false}
+              fullWidth={true}
               value={this.state.projectDescription}
               onChange={this.handleProjectDescriptionChange}
               underlineShow={true}
             /><br />
 
             <SelectField
-              value={this.state.contractSize}
-              onChange={this.handleContractSizeChange}
-              fullWidth={false}
-              floatingLabelText='Select a contract size'
+              value={this.state.contractValue}
+              onChange={this.handleContractValueChange}
+              fullWidth={true}
+              floatingLabelText='Select a contract value'
               underlineShow={true}
             >
               {sizes}
-            </SelectField><br />
+            </SelectField><br /><br />
 
-            
-
+            <TextField
+              hintText="Add location"
+              id="text-field-controlled"
+              fullWidth={true}
+              value={this.state.location}
+              onChange={this.handleLocationChange}
+              underlineShow={true}
+            /><br />
 
           </Dialog>
         </div>
