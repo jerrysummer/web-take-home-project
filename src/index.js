@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //-----------------------------------------------------------------------------------------
 //---------------------------------- Internal imports -------------------------------------
@@ -44,13 +45,15 @@ const store = createStore(
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <Route exact path="/" component={Home}/>
-      </div>
-    </ConnectedRouter>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <div>
+          <Route exact path="/" component={Home}/>
+        </div>
+      </ConnectedRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 )
 
