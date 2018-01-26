@@ -18,8 +18,10 @@ import TextField from 'material-ui/TextField';
 
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
-import { PROJECT_TYPES, CONTRACT_VALUES, HOME_STYLES as styles} from '../util/Constants'
+import { CONTRACT_VALUES, HOME_STYLES as styles } from '../util/Constants'
 import index from 'material-ui/MenuItem';
+import projectTypes from '../util/subcomponents/HomeTypeMenuItems';
+import projectValues from '../util/subcomponents/HomeValueMenuItems';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -43,7 +45,6 @@ class Home extends Component {
       max: '',
       location: '',
     }
-    this.handlerExample = this.handlerExample.bind(this);
   }
 
   //-------------------------------------------------------------------------
@@ -83,10 +84,6 @@ class Home extends Component {
     this.setState({ location: event.target.value });
   };
 
-  handlerExample() {
-    console.log("Handler Example Running!");
-  }
-
   //-------------------------------------------------------------------------
   //------------------------------- Render ----------------------------------
   //-------------------------------------------------------------------------
@@ -101,8 +98,6 @@ class Home extends Component {
         onClick={this.handleClose}
       />,
     ];
-
-    const { handlerExample } = this;
 
     return (
       <div className="home-container">
@@ -135,13 +130,7 @@ class Home extends Component {
               floatingLabelText="Select project type"
               fullWidth={true}
             >
-              {
-                PROJECT_TYPES.map((value, index) => {
-                  return (
-                    <MenuItem key={index} value={value.id} primaryText={value.name} />
-                  )
-                })
-              }
+              { projectTypes }
             </SelectField><br /><br />
 
             <TextField
@@ -158,13 +147,7 @@ class Home extends Component {
               fullWidth={true}
               floatingLabelText='Select a contract value'
             >
-              {
-                CONTRACT_VALUES.map((value, index) => {
-                  return (
-                    <MenuItem key={index} value={index} primaryText={value.description} />
-                  )
-                })
-              }
+              { projectValues }
             </SelectField><br /><br />
 
             <TextField
@@ -174,10 +157,8 @@ class Home extends Component {
               value={this.state.location}
               onChange={this.handleLocationChange}
             /><br />
-
           </Dialog>
         </div>
-        
       </div>
     );
   }
