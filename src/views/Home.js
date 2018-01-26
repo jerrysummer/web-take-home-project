@@ -56,7 +56,12 @@ class Home extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.handleSubmit();
   };
+
+  handleSubmit = () => {
+    console.log('submit')
+  }
 
   handleProjectTypeChange = (event, index, value) => {
     this.setState({ project_type_id: value });
@@ -141,11 +146,10 @@ class Home extends Component {
 
             <TextField
               hintText="Add a project description"
-              id="text-field-controlled"
+              id="text-field-controlled2"
               fullWidth={true}
-              value={this.state.projectDescription}
+              value={this.state.description}
               onChange={this.handleProjectDescriptionChange}
-              underlineShow={true}
             /><br />
 
             <SelectField
@@ -153,7 +157,6 @@ class Home extends Component {
               onChange={this.handleContractValueChange}
               fullWidth={true}
               floatingLabelText='Select a contract value'
-              underlineShow={true}
             >
               {
                 CONTRACT_VALUES.map((value, index) => {
@@ -170,7 +173,6 @@ class Home extends Component {
               fullWidth={true}
               value={this.state.location}
               onChange={this.handleLocationChange}
-              underlineShow={true}
             /><br />
 
           </Dialog>
