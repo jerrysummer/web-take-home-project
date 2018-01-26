@@ -18,23 +18,8 @@ import TextField from 'material-ui/TextField';
 
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
-import PROJECT_TYPES from '../util/Constants'
-import CONTRACT_VALUES from '../util/Constants'
-
-const items = [
-  <MenuItem key={1} value={1} primaryText="Never" />,
-  <MenuItem key={2} value={2} primaryText="Every Night" />,
-  <MenuItem key={3} value={3} primaryText="Weeknights" />,
-  <MenuItem key={4} value={4} primaryText="Weekends" />,
-  <MenuItem key={5} value={5} primaryText="Weekly" />,
-];
-const sizes = [
-  <MenuItem key={1} value={1} primaryText="Never" />,
-  <MenuItem key={2} value={2} primaryText="Every Night" />,
-  <MenuItem key={3} value={3} primaryText="Weeknights" />,
-  <MenuItem key={4} value={4} primaryText="Weekends" />,
-  <MenuItem key={5} value={5} primaryText="Weekly" />,
-];
+import { PROJECT_TYPES, CONTRACT_VALUES, HOME_STYLES as styles} from '../util/Constants'
+import index from 'material-ui/MenuItem';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -51,9 +36,11 @@ class Home extends Component {
     super(props);
     this.state = {
       open: false,
-      projectType: null,
-      projectDescription: '',
-      contractValue: null,
+      project_type_id: null,
+      description: '',
+      contract_value_id: null,
+      min: '',
+      max: '',
       location: '',
     }
     this.handlerExample = this.handlerExample.bind(this);
@@ -72,15 +59,19 @@ class Home extends Component {
   };
 
   handleProjectTypeChange = (event, index, value) => {
-    this.setState({ projectType: value });
+    this.setState({ project_type_id: value });
   };
   
   handleProjectDescriptionChange = (event, index, value) => {
-    this.setState({ projectDescription: event.target.value });
+    this.setState({ description: event.target.value });
   };
 
   handleContractValueChange = (event, index, value) => {
-    this.setState({ contractValue: value });
+    this.setState({ 
+      contract_value_id: index, 
+      min: CONTRACT_VALUES[index].min,
+      max: CONTRACT_VALUES[index].max,
+    });
   };
 
   handleLocationChange = (event, index, value) => {
@@ -96,42 +87,6 @@ class Home extends Component {
   //-------------------------------------------------------------------------
   
   render() {
-    const styles = {
-      uploadButton: {
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
-      uploadInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-      },
-      flatButton: {
-        marginLeft: 0,
-        marginRight: 'auto',
-        display: 'block',
-      }, 
-      customContentStyle: {
-        'width': '429px',
-        'height': '531px',
-      },
-      customTitleStyle: {
-        'width': '264px',
-        'height': '23px',
-        fontSize: '18px',
-        'color': 'rgb(57, 57, 57)',
-        'margin': 'auto',
-        textAlign: 'center',
-        fontWeight: 'regular',
-      }
-    };
-
     const actions = [
       <FlatButton
         style={styles.flatButton}
@@ -170,12 +125,18 @@ class Home extends Component {
             </FlatButton>
 
             <SelectField
-              value={this.state.projectType}
+              value={this.state.project_type_id}
               onChange={this.handleProjectTypeChange}
               floatingLabelText="Select project type"
               fullWidth={true}
             >
-              {items}
+              {
+                PROJECT_TYPES.map((value, index) => {
+                  return (
+                    <MenuItem key={index} value={value.id} primaryText={value.name} />
+                  )
+                })
+              }
             </SelectField><br /><br />
 
             <TextField
@@ -188,13 +149,19 @@ class Home extends Component {
             /><br />
 
             <SelectField
-              value={this.state.contractValue}
+              value={this.state.contract_value_id}
               onChange={this.handleContractValueChange}
               fullWidth={true}
               floatingLabelText='Select a contract value'
               underlineShow={true}
             >
-              {sizes}
+              {
+                CONTRACT_VALUES.map((value, index) => {
+                  return (
+                    <MenuItem key={index} value={index} primaryText={value.description} />
+                  )
+                })
+              }
             </SelectField><br /><br />
 
             <TextField

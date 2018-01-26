@@ -72,7 +72,42 @@ export const CONTRACT_VALUES = [
   {id: 18, description: '$4M — $5M+', min: 4000000, max: 5000000}
 ];
 
-
+// Project styles 
+export const HOME_STYLES = {
+  uploadButton: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  uploadInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+  flatButton: {
+    marginLeft: 0,
+    marginRight: 'auto',
+    display: 'block',
+  },
+  customContentStyle: {
+    'width': '429px',
+    'height': '531px',
+  },
+  customTitleStyle: {
+    'width': '264px',
+    'height': '23px',
+    fontSize: '18px',
+    'color': 'rgb(57, 57, 57)',
+    'margin': 'auto',
+    textAlign: 'center',
+    fontWeight: 'regular',
+  }
+};
 
 
 
