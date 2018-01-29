@@ -7,9 +7,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-// import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 
 //-----------------------------------------------------------------------------------------
@@ -19,9 +17,9 @@ import TextField from 'material-ui/TextField';
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
 import { CONTRACT_VALUES, HOME_STYLES as styles } from '../util/Constants'
-import index from 'material-ui/MenuItem';
 import projectTypes from '../util/subcomponents/HomeTypeMenuItems';
 import projectValues from '../util/subcomponents/HomeValueMenuItems';
+import Location from './LocationAutoComplete'
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -38,12 +36,21 @@ class Home extends Component {
     super(props);
     this.state = {
       open: false,
-      project_type_id: null,
+      suburb:'',
+      state:'',
+      location_place_id:'',
+      location_lat:'',
+      location_long:'',
+      address:'',
+      date_unix:'',
       description: '',
+      images:[],
+      files: [],
+      default_image_url:'',
+      project_type_id: null,
       contract_value_id: null,
-      min: '',
-      max: '',
-      location: '',
+      min_contract_value: '',
+      max_contract_value: '',
     }
   }
 
@@ -75,13 +82,13 @@ class Home extends Component {
   handleContractValueChange = (event, index, value) => {
     this.setState({ 
       contract_value_id: index, 
-      min: CONTRACT_VALUES[index].min,
-      max: CONTRACT_VALUES[index].max,
+      min_contract_value: CONTRACT_VALUES[index].min,
+      max_contract_value: CONTRACT_VALUES[index].max,
     });
   };
 
-  handleLocationChange = (event, index, value) => {
-    this.setState({ location: event.target.value });
+  handleLocationChange = (payload) => {
+    this.setState({ ...payload });
   };
 
   //-------------------------------------------------------------------------
@@ -150,14 +157,8 @@ class Home extends Component {
               { projectValues }
             </SelectField><br /><br />
 
-            <TextField
-              hintText="Add location"
-              id="text-field-controlled"
-              fullWidth={true}
-              value={this.state.location}
-              onChange={this.handleLocationChange}
-            /><br />
-          </Dialog>
+            <Location handleLocationChange={this.handleLocationChange}/>
+          </Dialog>          
         </div>
       </div>
     );

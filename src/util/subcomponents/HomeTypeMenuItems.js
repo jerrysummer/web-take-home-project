@@ -3,16 +3,14 @@
 //-----------------------------------------------------------------------------------------
 
 import MenuItem from 'material-ui/MenuItem';
-import React, { Component } from 'react';
+import React from 'react';
 
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Local imports --------------------------------------
 //-----------------------------------------------------------------------------------------
 
-import { PROJECT_TYPES, CONTRACT_VALUES } from '../Constants';
-
-
+import { PROJECT_TYPES } from '../Constants';
 
 export default PROJECT_TYPES.map((value, index) => {
   return (

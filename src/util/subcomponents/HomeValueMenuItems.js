@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------------------
 
 import MenuItem from 'material-ui/MenuItem';
-import React, { Component } from 'react';
+import React from 'react';
 
 
 //-----------------------------------------------------------------------------------------
@@ -11,8 +11,6 @@ import React, { Component } from 'react';
 //-----------------------------------------------------------------------------------------
 
 import { CONTRACT_VALUES } from '../Constants';
-
-
 
 export default CONTRACT_VALUES.map((value, index) => {
   return (

@@ -27,6 +27,12 @@ body {
   background-repeat:no-repeat;
   background-size:cover;
   border: 1px solid #969696;
+  .pac-container {
+    z-index: 1600;
+  }
+  input {
+    width: 100%;
+  }
 }
 
 .home-container {
