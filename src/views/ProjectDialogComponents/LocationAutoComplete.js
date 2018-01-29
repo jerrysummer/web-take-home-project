@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextField from 'material-ui/TextField';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Local imports --------------------------------------
@@ -29,7 +30,8 @@ class Location extends Component {
 
   componentDidMount() {
 
-    let input = this.refs.search;
+    let input = this.refs.search.input;
+    input.placeholder = '';
     let options = {
       componentRestrictions: {
         country: 'us'
@@ -76,9 +78,11 @@ class Location extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={(e) => e.preventDefault()}>
-            <input className="location-input" type="text" name="name" ref="search" />
-        </form> 
+        <TextField
+          ref="search" 
+          hintText="Add a location"
+          fullWidth={true}
+        />
       </div>
     );
   }
