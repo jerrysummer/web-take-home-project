@@ -1,10 +1,10 @@
-const exampleAction = payload => {
+const addProject = payload => {
   return {
-    type: "exampleAction",
+    type: "ADD_PROJECT",
     payload
   }
 }
 
 export {
-  exampleAction
+  addProject
 }

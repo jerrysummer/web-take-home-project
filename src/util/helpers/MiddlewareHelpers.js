@@ -20,9 +20,24 @@ const defaultCatchCallback = err => {
 //--- Build the value for the "Workyard-Agent" key in the API request header ---
 //------------------------------------------------------------------------------
 
+const operatingSystemDetector = () => {
+  let OSName = "Unknown OS";
+  if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows";
+  if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS";
+  if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX";
+  if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux";
+  return OSName;
+}
 
 const getWorkyardAgentHeader = () => {
-  return ""
+
+  let devicePixelRatio = window.devicePixelRatio;
+  let screenWidth = window.screen.width;
+  let screenHeight = window.screen.height;
+
+  const workyardAgent = `website|${operatingSystemDetector()}|1|1|${screenWidth}|${screenHeight}|${devicePixelRatio}|1|us`;
+
+  return workyardAgent;
 }
 
 

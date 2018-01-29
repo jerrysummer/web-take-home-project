@@ -21,6 +21,8 @@ import Location from './LocationAutoComplete';
 import { openUploadCareDialog, imagesToFiles, stateToPayload } from '../../util/helpers/ProjectHelpers';
 import Images from './ImagesDisplay';
 import './Dialogbox.css';
+import { postProject } from '../../util/api_calls/ProjectApiCalls'
+import { addProject } from '../../actions/ProjectActions'
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -57,10 +59,25 @@ class DialogBox extends Component {
   //-------------------------------------------------------------------------
   //------------------------- Handler methods -------------------------------
   //-------------------------------------------------------------------------
+  // header = () => {
+  //   let OSName = "Unknown OS";
+  //   if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows";
+  //   if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS";
+  //   if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX";
+  //   if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux";
+
+  //   let devicePixelRatio = window.devicePixelRatio;
+
+  //   let screenWidth = window.screen.width;
+  //   let screenHeight = window.screen.height;
+
+  //   console.log(OSName, devicePixelRatio, screenWidth, screenHeight)
+  // }
 
   handleSubmit = () => {
-    let postPayload = stateToPayload(this.state);
-    console.log(postPayload)
+    let data = stateToPayload(this.state);
+
+    this.props.addProject(data);
     this.props.handleClose();
   }
 
@@ -189,4 +206,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogBox);
+export default connect(null, { addProject })(DialogBox);

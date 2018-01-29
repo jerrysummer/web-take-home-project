@@ -13,7 +13,7 @@ export const DEFAULT_UPLOADCARE_SETTINGS = {
 
 // Middleware & RestApiClient
 export const BASIC_API_TOKEN = 'YXBwOllYQndPbk5wWlc1dVlUSXdNVEZ6YjJacFlUSXdNVFU9';
-export const BEARER_API_TOKEN = 'UserSpecificToken'; // Ask Sam for a valid token. This token is how we identify the user making the API call.
+export const BEARER_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9zdGFnaW5nLWFwaS53b3JreWFyZC5jb21cL2xvZ2luX2VtYWlsIiwic3ViIjoyODkzLCJpYXQiOjE1MTY5NTI2MDksImV4cCI6MTUxOTU0NDYwOX0.jzzDe1IfGJ00RZO9Lk2UUZcqcMG9H80stDeOFIcBE0Q'; // Ask Sam for a valid token. This token is how we identify the user making the API call.
 export const PRIVACY_TYPE_AUTH = 'auth';
 export const PRIVACY_TYPE_BASIC = 'basic';
 export const API_URL = "https://staging-api.workyard.com";
