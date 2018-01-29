@@ -60,7 +60,50 @@ const openUploadCareDialog = handleUploadedImages => {
 }
 
 
-export {
-  openUploadCareDialog
+
+
+//-----------------------------------------------------------------------------------------
+//------------- Converts the images array to files array for openUploadCareDialog ---------
+//-----------------------------------------------------------------------------------------
+
+function imagesToFiles(images) {
+  console.log('imagesToFiles')
+  let output = [];
+  for(let  i = 0; i < images.length; i++) {
+    let url = images[i].url;
+    let fileIndexStart = url.indexOf('.com/') + 5;
+    let fileIndexEnd = url.length - 1;
+    output.push(url.substring(fileIndexStart, fileIndexEnd));
+  }
+  return output;
 }
 
+//-----------------------------------------------------------------------------------------
+//------------- Converts the Home state for workyard API post payload format --------------
+//-----------------------------------------------------------------------------------------
+
+function stateToPayload(state) {
+  return {
+    'suburb' : state.suburb,
+    'state' : state.state,
+    'location_place_id' : state.location_place_id,
+    'location_lat' : state.location_lat,
+    'location_long' : state.location_long,
+    'address' : state.address,
+    'date_unix': (Date.now() / 1000),
+    'description' : state.description,
+    'images' : state.images,
+    'files' : state.files,
+    'default_image_url' : state.default_image_url,
+    'project_type_id' : state.project_type_id,
+    'min_contract_value' : state.min_contract_value,
+    'max_contract_value' : state.max_contract_value,
+  }
+}
+
+
+export {
+  openUploadCareDialog,
+  imagesToFiles,
+  stateToPayload,
+}

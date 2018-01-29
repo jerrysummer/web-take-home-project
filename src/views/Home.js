@@ -16,10 +16,13 @@ import TextField from 'material-ui/TextField';
 
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
-import { CONTRACT_VALUES, HOME_STYLES as styles } from '../util/Constants'
+import { CONTRACT_VALUES, HOME_STYLES as styles } from '../util/Constants';
 import projectTypes from './ProjectDialogComponents/HomeTypeMenuItems';
 import projectValues from './ProjectDialogComponents/HomeValueMenuItems';
-import Location from './ProjectDialogComponents/LocationAutoComplete'
+import Location from './ProjectDialogComponents/LocationAutoComplete';
+import DialogBox from './ProjectDialogComponents/DialogBox';
+import { openUploadCareDialog, imagesToFiles, stateToPayload } from '../util/helpers/ProjectHelpers';
+import Images from './ProjectDialogComponents/ImagesDisplay';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -64,11 +67,26 @@ class Home extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-    this.handleSubmit();
   };
 
   handleSubmit = () => {
-    console.log('submit')
+    let postPayload = stateToPayload(this.state);
+    console.log(postPayload)
+    this.handleClose();
+  }
+  
+  handleImageUpload = () => {
+    openUploadCareDialog(this.imageSetState);
+  }
+
+  imageSetState = (images) => {
+    let files = imagesToFiles(images)
+    let default_image_url = images[0].url;
+    this.setState({ 
+      images,
+      files,
+      default_image_url,
+    });
   }
 
   handleProjectTypeChange = (event, index, value) => {
@@ -102,13 +120,13 @@ class Home extends Component {
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onClick={this.handleClose}
+        onClick={this.handleSubmit}
       />,
     ];
 
     return (
       <div className="home-container">
-        <img src={WorkyardLogo} alt="Workyard logo" className="workyard-logo"/>
+        <img src={ WorkyardLogo } alt="Workyard logo" className="workyard-logo"/>
         <h1>Post a project</h1>
         <button onClick={this.handleOpen}>Create Project</button>
 
@@ -127,9 +145,11 @@ class Home extends Component {
               labelPosition="before"
               containerElement="label"
               style={styles.uploadButton}
+              onClick={this.handleImageUpload}
             >
-              <input type="file" style={styles.uploadInput}/>
             </FlatButton>
+
+            <Images images={this.state.images} />
 
             <SelectField
               value={this.state.project_type_id}
@@ -138,7 +158,9 @@ class Home extends Component {
               fullWidth={true}
             >
               { projectTypes }
-            </SelectField><br /><br />
+            </SelectField>
+            <br />
+            <br />
 
             <TextField
               hintText="Add a project description"
@@ -146,7 +168,8 @@ class Home extends Component {
               fullWidth={true}
               value={this.state.description}
               onChange={this.handleProjectDescriptionChange}
-            /><br />
+            />
+            <br />
 
             <SelectField
               value={this.state.contract_value_id}
@@ -155,7 +178,9 @@ class Home extends Component {
               floatingLabelText='Select a contract value'
             >
               { projectValues }
-            </SelectField><br /><br />
+            </SelectField>
+            <br />
+            <br />
 
             <Location handleLocationChange={this.handleLocationChange}/>
           </Dialog>          
@@ -172,7 +197,6 @@ class Home extends Component {
 
 
   const mapStateToProps = (state, ownProps) => {
-
     return {
     }
   }
