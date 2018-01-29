@@ -17,9 +17,9 @@ import TextField from 'material-ui/TextField';
 import './Home.css';
 import WorkyardLogo from '../assets/images/workyard-logo.svg';
 import { CONTRACT_VALUES, HOME_STYLES as styles } from '../util/Constants'
-import projectTypes from '../util/subcomponents/HomeTypeMenuItems';
-import projectValues from '../util/subcomponents/HomeValueMenuItems';
-import Location from './LocationAutoComplete'
+import projectTypes from './ProjectDialogComponents/HomeTypeMenuItems';
+import projectValues from './ProjectDialogComponents/HomeValueMenuItems';
+import Location from './ProjectDialogComponents/LocationAutoComplete'
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------

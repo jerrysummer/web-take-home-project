@@ -10,10 +10,10 @@ import React from 'react';
 //------------------------------------ Local imports --------------------------------------
 //-----------------------------------------------------------------------------------------
 
-import { CONTRACT_VALUES } from '../Constants';
+import { PROJECT_TYPES } from '../../util/Constants';
 
-export default CONTRACT_VALUES.map((value, index) => {
+export default PROJECT_TYPES.map((value, index) => {
   return (
-    <MenuItem key={index} value={index} primaryText={value.description} />
+    <MenuItem key={index} value={value.id} primaryText={value.name} />
   )
 })
