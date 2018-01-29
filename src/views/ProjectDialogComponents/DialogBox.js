@@ -17,9 +17,10 @@ import TextField from 'material-ui/TextField';
 import { CONTRACT_VALUES, HOME_STYLES as styles } from '../../util/Constants'
 import projectTypes from './HomeTypeMenuItems';
 import projectValues from './HomeValueMenuItems';
-import Location from './LocationAutoComplete'
-import { openUploadCareDialog, imagesToFiles, stateToPayload } from '../../util/helpers/ProjectHelpers'
-import Images from './ImagesDisplay'
+import Location from './LocationAutoComplete';
+import { openUploadCareDialog, imagesToFiles, stateToPayload } from '../../util/helpers/ProjectHelpers';
+import Images from './ImagesDisplay';
+import './Dialogbox.css';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -131,7 +132,7 @@ class DialogBox extends Component {
         >
         </FlatButton>
 
-        <Images images={this.state.images} />
+        <Images images={this.state.images} className="images-container"/>
 
         <SelectField
           value={this.state.project_type_id}

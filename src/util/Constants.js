@@ -78,6 +78,9 @@ export const HOME_STYLES = {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
+    border: 'solid 2px lightgrey',
+    borderRadius: '3px',
+    width: '170px',
   },
   uploadInput: {
     cursor: 'pointer',
