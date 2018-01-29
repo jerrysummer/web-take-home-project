@@ -41,7 +41,7 @@ class ImagesDisplay extends Component {
         {
           this.props.images.map((image, index) => {
             return(
-              <img src={image.url} key={index}/>
+              <img src={image.url} key={index} alt=""/>
             )
           })
         }

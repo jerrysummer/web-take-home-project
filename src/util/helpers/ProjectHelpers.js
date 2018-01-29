@@ -37,7 +37,7 @@ const openUploadCareDialog = handleUploadedImages => {
   uploadcare.openDialog(null, DEFAULT_UPLOADCARE_SETTINGS)
   // Fail handler
   .fail(failedUpload => { 
-    console.log("upload failed: ". failedUpload);
+    console.log("upload failed: ", failedUpload);
   })
   // Once modal is closed and files have been converted to url's, fire done handler
   .done(info => {
@@ -90,7 +90,7 @@ function stateToPayload(state) {
     'location_lat' : state.location_lat,
     'location_long' : state.location_long,
     'address' : state.address,
-    'date_unix': (Date.now() / 1000),
+    'date_unix': Math.round(Date.now() / 1000),
     'description' : state.description,
     'images' : state.images,
     'files' : state.files,

@@ -60,6 +60,7 @@ class DialogBox extends Component {
   handleSubmit = () => {
     let postPayload = stateToPayload(this.state);
     console.log(postPayload)
+    this.props.handleClose();
   }
 
   handleImageUpload = () => {
@@ -118,8 +119,8 @@ class DialogBox extends Component {
         modal={false}
         contentStyle={styles.customContentStyle}
         titleStyle={styles.customTitleStyle}
-        open={this.state.open}
-        onRequestClose={this.handleClose}
+        open={this.props.open}
+        onRequestClose={this.props.handleClose}
       >
         <FlatButton
           label="Upload photos"

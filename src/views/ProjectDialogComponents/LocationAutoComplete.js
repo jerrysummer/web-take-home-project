@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AutoComplete from 'material-ui/AutoComplete';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Local imports --------------------------------------
