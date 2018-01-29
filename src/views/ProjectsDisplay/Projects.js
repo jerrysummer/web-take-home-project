@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 //------------------------------------ Local imports --------------------------------------
 //-----------------------------------------------------------------------------------------
 
+import './Projects.css';
+import { CONTRACT_VALUES, PROJECT_TYPES } from '../../util/Constants'
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Projects Component -------------------------------------
@@ -24,7 +26,6 @@ class Projects extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.project.project);
   }
 
   //-------------------------------------------------------------------------
@@ -40,8 +41,22 @@ class Projects extends Component {
     return (
       <div className="projects-container">
 
-        <p>test project</p>
-        {this.props.project.length}
+        {this.props.project.map((project,index) => {
+          return(
+            <div className="project-box" key={index}>
+              <div className="project-text">
+
+                <div>{PROJECT_TYPES[project.project_type_id - 1].name}</div>
+                <br/>
+                <div>{project.description}</div>
+                <br />
+                <div>{`$ ${project.min_contract_value}K - ${project.min_contract_value}K`}</div>
+                <div>{`${project.suburb}, ${project.state}`}</div>
+
+              </div>
+            </div>
+          )
+        })}
 
       </div>
     );
