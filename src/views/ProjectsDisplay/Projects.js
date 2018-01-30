@@ -41,9 +41,7 @@ class Projects extends Component {
   render() {
     return (
       <div className="projects-container">
-
         {this.props.projects}
-
       </div>
     );
   }

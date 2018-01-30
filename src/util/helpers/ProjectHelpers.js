@@ -90,10 +90,9 @@ function imagesToImages(images) {
 //---------- Converts projects in redux store to divs -------------------------------------
 //-----------------------------------------------------------------------------------------
 
-function projectsToDivs(projects) {
-  console.log('projectsToDivs')
-  
-  return  projects.map((project, index) => {
+function projectsToDivs(projects) {  
+  return(
+    projects.map((project, index) => {
       return (
         <div className="project-box" key={index}>
           <div className="project-text">
@@ -110,7 +109,21 @@ function projectsToDivs(projects) {
         </div>
       )
     })
-  
+  )  
+}
+
+//-----------------------------------------------------------------------------------------
+//------------------ Converts uploaded images to divs -------------------------------------
+//-----------------------------------------------------------------------------------------
+
+function imagesToDivs(images) {  
+  return (
+    images.map((image, index) => {
+      return (
+        <img src={image} key={index} alt="" />
+      )
+    })
+  )
 }
 
 //-----------------------------------------------------------------------------------------
@@ -160,4 +173,5 @@ export {
   imagesToImages,
   validatePayload,
   projectsToDivs,
+  imagesToDivs,
 }

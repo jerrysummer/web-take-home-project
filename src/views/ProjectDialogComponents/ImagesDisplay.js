@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 //------------------------------------ Local imports --------------------------------------
 //-----------------------------------------------------------------------------------------
 
-
+import { imagesToDivs } from '../../util/helpers/ProjectHelpers';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ ImagesDisplay Component -------------------------------------
@@ -38,13 +38,7 @@ class ImagesDisplay extends Component {
   render() {
     return (
       <div className="images-container">
-        {
-          this.props.images.map((image, index) => {
-            return(
-              <img src={image} key={index} alt=""/>
-            )
-          })
-        }
+        { imagesToDivs(this.props.images) }
       </div>
     );
   }

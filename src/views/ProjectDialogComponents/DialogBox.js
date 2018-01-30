@@ -66,7 +66,7 @@ class DialogBox extends Component {
     let validity = validatePayload(payload);
 
     if(validity.validity) {
-      // addProject(payload,{},(res)=> console.log(res))
+      addProject(payload,{},(res)=> console.log(res));
       this.props.addProjectToStore(payload);
       this.props.handleClose();
       this.clearState();
@@ -200,6 +200,9 @@ class DialogBox extends Component {
         <br />
 
         <Location handleLocationChange={this.handleLocationChange} />
+        <br />
+        <br /> 
+        <br />
       </Dialog>
     );
   }
