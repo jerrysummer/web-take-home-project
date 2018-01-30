@@ -75,10 +75,14 @@ class DialogBox extends Component {
   // }
 
   handleSubmit = () => {
-    let data = stateToPayload(this.state);
+    let payload = stateToPayload(this.state);
 
-    this.props.addProject(data);
+    // TODO: validate data first
+    this.props.addProject(payload);
     this.props.handleClose();
+  }
+  fieldValidate = (payload) => {
+
   }
 
   handleImageUpload = () => {

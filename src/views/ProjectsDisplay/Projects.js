@@ -48,7 +48,7 @@ class Projects extends Component {
 
                 <div>{PROJECT_TYPES[project.project_type_id - 1].name}</div>
                 <br/>
-                <div>{project.description}</div>
+                <div className="project-description">{project.description}</div>
                 <br />
                 <div>{`$ ${project.min_contract_value}K - ${project.min_contract_value}K`}</div>
                 <div>{`${project.suburb}, ${project.state}`}</div>

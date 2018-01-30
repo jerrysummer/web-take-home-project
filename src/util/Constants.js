@@ -120,3 +120,5 @@ export const HOME_STYLES = {
 
 // Store you action names e.g. ADD_PROJECT, here
 
+
+export const ADD_PROJECT = "ADD_PROJECT"
