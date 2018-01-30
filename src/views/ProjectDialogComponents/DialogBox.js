@@ -66,7 +66,7 @@ class DialogBox extends Component {
     let validity = validatePayload(payload);
 
     if(validity.validity) {
-      addProject(payload,{},(res)=> console.log(res));
+      addProject(payload,{},(res)=> console.log('api res',res));
       this.props.addProjectToStore(payload);
       this.props.handleClose();
       this.clearState();
