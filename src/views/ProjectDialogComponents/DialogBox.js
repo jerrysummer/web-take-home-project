@@ -14,15 +14,15 @@ import TextField from 'material-ui/TextField';
 //------------------------------------ Local imports --------------------------------------
 //-----------------------------------------------------------------------------------------
 
-import { CONTRACT_VALUES, HOME_STYLES as styles } from '../../util/Constants'
+import { CONTRACT_VALUES, HOME_STYLES as styles, examplePayload } from '../../util/Constants'
 import projectTypes from './HomeTypeMenuItems';
 import projectValues from './HomeValueMenuItems';
 import Location from './LocationAutoComplete';
-import { openUploadCareDialog, imagesToFiles, stateToPayload } from '../../util/helpers/ProjectHelpers';
+import { openUploadCareDialog, imagesToFiles, stateToPayload, imagesToImages} from '../../util/helpers/ProjectHelpers';
 import Images from './ImagesDisplay';
 import './Dialogbox.css';
-import { postProject } from '../../util/api_calls/ProjectApiCalls'
-import { addProject } from '../../actions/ProjectActions'
+import { addProject } from '../../util/api_calls/ProjectApiCalls'
+import { addProjectToStore } from '../../actions/ProjectActions'
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Home Component -------------------------------------
@@ -59,39 +59,49 @@ class DialogBox extends Component {
   //-------------------------------------------------------------------------
   //------------------------- Handler methods -------------------------------
   //-------------------------------------------------------------------------
-  // header = () => {
-  //   let OSName = "Unknown OS";
-  //   if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows";
-  //   if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS";
-  //   if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX";
-  //   if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux";
-
-  //   let devicePixelRatio = window.devicePixelRatio;
-
-  //   let screenWidth = window.screen.width;
-  //   let screenHeight = window.screen.height;
-
-  //   console.log(OSName, devicePixelRatio, screenWidth, screenHeight)
-  // }
 
   handleSubmit = () => {
     let payload = stateToPayload(this.state);
 
     // TODO: validate data first
-    this.props.addProject(payload);
+
+    addProject(payload,{},(res)=> console.log('personal',res))
+
+    this.props.addProjectToStore(payload);
     this.props.handleClose();
+    this.clearState();
   }
   fieldValidate = (payload) => {
 
+  }
+  clearState = (payload) => {
+    this.setState({
+      suburb: '',
+      state: '',
+      location_place_id: '',
+      location_lat: '',
+      location_long: '',
+      address: '',
+      date_unix: '',
+      description: '',
+      images: [],
+      files: [],
+      default_image_url: '',
+      project_type_id: null,
+      contract_value_id: null,
+      min_contract_value: '',
+      max_contract_value: '',
+    });
   }
 
   handleImageUpload = () => {
     openUploadCareDialog(this.imageSetState);
   }
 
-  imageSetState = (images) => {
-    let files = imagesToFiles(images)
-    let default_image_url = images[0].url;
+  imageSetState = (uploadedImages) => {
+    let files = imagesToFiles(uploadedImages);
+    let images = imagesToImages(uploadedImages);
+    let default_image_url = images[0];
     this.setState({
       images,
       files,
@@ -203,11 +213,9 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-
 const mapDispatchToProps = dispatch => {
   return {
   }
 }
 
-
-export default connect(null, { addProject })(DialogBox);
+export default connect(null, { addProjectToStore })(DialogBox);

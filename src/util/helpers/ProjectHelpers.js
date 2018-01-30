@@ -67,13 +67,21 @@ const openUploadCareDialog = handleUploadedImages => {
 //-----------------------------------------------------------------------------------------
 
 function imagesToFiles(images) {
-  console.log('imagesToFiles')
   let output = [];
   for(let  i = 0; i < images.length; i++) {
     let url = images[i].url;
     let fileIndexStart = url.indexOf('.com/') + 5;
     let fileIndexEnd = url.length - 1;
     output.push(url.substring(fileIndexStart, fileIndexEnd));
+  }
+  return output;
+}
+
+function imagesToImages(images) {
+  let output = [];
+  for(let  i = 0; i < images.length; i++) {
+    let url = images[i].url;
+    output.push(url);
   }
   return output;
 }
@@ -106,4 +114,5 @@ export {
   openUploadCareDialog,
   imagesToFiles,
   stateToPayload,
+  imagesToImages,
 }

@@ -1,6 +1,6 @@
 import { ADD_PROJECT } from '../util/Constants';
 
-const addProject = payload => {
+const addProjectToStore = payload => {
   return {
     type: ADD_PROJECT,
     payload
@@ -8,5 +8,5 @@ const addProject = payload => {
 }
 
 export {
-  addProject
+  addProjectToStore
 }

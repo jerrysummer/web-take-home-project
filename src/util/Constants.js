@@ -112,7 +112,28 @@ export const HOME_STYLES = {
   }
 };
 
+// Test payloads
 
+export const examplePayload = {
+  "suburb": "Mascot",
+  "state": "NSW",
+  "location_place_id": "ChIJz-9y-iGxEmsRQMAyFmh9AQU",
+  "location_lat": -33.9291,
+  "location_long": 151.18793000000005,
+  "address": "Mascot NSW 2020, Australia",
+  "date_unix": 1512447118,
+  "description": "Jerry Is The Best!!!!",
+  "images": [
+    "https://www.lamkins.com.sg/images/mega%20bloks%20cool%20construction%20site.jpg"
+  ],
+  "files": [
+    "52d0be9d-e785-4b3b-9e13-e05f5aba6b02"
+  ],
+  "default_image_url": "https://www.lamkins.com.sg/images/mega%20bloks%20cool%20construction%20site.jpg",
+  "project_type_id": "3",
+  "min_contract_value": 2500,
+  "max_contract_value": 5000
+}
 
 //-----------------------------------------------
 //---------------- Action names -----------------
