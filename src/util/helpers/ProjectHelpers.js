@@ -63,7 +63,7 @@ const openUploadCareDialog = handleUploadedImages => {
 
 
 //-----------------------------------------------------------------------------------------
-//------------- Converts the images array to files array for openUploadCareDialog ---------
+//---------- Converts the images array from uploadcare to files array for api call  -------
 //-----------------------------------------------------------------------------------------
 
 function imagesToFiles(images) {
@@ -84,6 +84,22 @@ function imagesToImages(images) {
     output.push(url);
   }
   return output;
+}
+
+//-----------------------------------------------------------------------------------------
+//---------- Validates payload for empty values -------------------------------------------
+//-----------------------------------------------------------------------------------------
+
+function validatePayload(payload) {
+  let validity = true;
+  let empties = [];
+  for(var key in payload) {
+    if(payload[key].length === 0) {
+      empties.push(key);
+      validity = false;
+    }
+  }
+  return {validity,empties};
 }
 
 //-----------------------------------------------------------------------------------------
@@ -115,4 +131,5 @@ export {
   imagesToFiles,
   stateToPayload,
   imagesToImages,
+  validatePayload,
 }

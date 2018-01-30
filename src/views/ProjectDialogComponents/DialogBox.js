@@ -18,7 +18,7 @@ import { CONTRACT_VALUES, HOME_STYLES as styles, examplePayload } from '../../ut
 import projectTypes from './HomeTypeMenuItems';
 import projectValues from './HomeValueMenuItems';
 import Location from './LocationAutoComplete';
-import { openUploadCareDialog, imagesToFiles, stateToPayload, imagesToImages} from '../../util/helpers/ProjectHelpers';
+import { openUploadCareDialog, imagesToFiles, stateToPayload, imagesToImages, validatePayload} from '../../util/helpers/ProjectHelpers';
 import Images from './ImagesDisplay';
 import './Dialogbox.css';
 import { addProject } from '../../util/api_calls/ProjectApiCalls'
@@ -49,8 +49,8 @@ class DialogBox extends Component {
       images: [],
       files: [],
       default_image_url: '',
-      project_type_id: null,
-      contract_value_id: null,
+      project_type_id: '',
+      contract_value_id: '',
       min_contract_value: '',
       max_contract_value: '',
     }
@@ -63,17 +63,20 @@ class DialogBox extends Component {
   handleSubmit = () => {
     let payload = stateToPayload(this.state);
 
-    // TODO: validate data first
+    let validity = validatePayload(payload);
 
-    addProject(payload,{},(res)=> console.log('personal',res))
+    if(validity.validity) {
+      addProject(payload,{},(res)=> console.log(res))
+      this.props.addProjectToStore(payload);
+      this.props.handleClose();
+      this.clearState();
+    } else {
+      alert('All fields are required', validity.empties);
+    }
 
-    this.props.addProjectToStore(payload);
-    this.props.handleClose();
-    this.clearState();
   }
-  fieldValidate = (payload) => {
 
-  }
+
   clearState = (payload) => {
     this.setState({
       suburb: '',
@@ -87,8 +90,8 @@ class DialogBox extends Component {
       images: [],
       files: [],
       default_image_url: '',
-      project_type_id: null,
-      contract_value_id: null,
+      project_type_id: '',
+      contract_value_id: '',
       min_contract_value: '',
       max_contract_value: '',
     });

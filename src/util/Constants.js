@@ -81,6 +81,10 @@ export const HOME_STYLES = {
     border: 'solid 2px lightgrey',
     borderRadius: '3px',
     width: '170px',
+    paddingBottom: '10px',
+    color: 'grey',
+    lineHeight: '32px',
+    marginTop: '25px',
   },
   uploadInput: {
     cursor: 'pointer',
@@ -93,7 +97,7 @@ export const HOME_STYLES = {
     opacity: 0,
   },
   flatButton: {
-    marginLeft: 0,
+    marginLeft: '15px',
     marginRight: 'auto',
     display: 'block',
   },

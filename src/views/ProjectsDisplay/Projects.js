@@ -51,6 +51,7 @@ class Projects extends Component {
                 <div className="project-description">{project.description}</div>
                 <br />
                 <div>{`$ ${project.min_contract_value}K - ${project.min_contract_value}K`}</div>
+                <br />
                 <div>{`${project.suburb}, ${project.state}`}</div>
 
               </div>
