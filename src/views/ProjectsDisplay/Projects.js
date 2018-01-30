@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 //-----------------------------------------------------------------------------------------
 
 import './Projects.css';
-import { CONTRACT_VALUES, PROJECT_TYPES } from '../../util/Constants'
+import { CONTRACT_VALUES, PROJECT_TYPES } from '../../util/Constants';
+import { projectsToDivs } from '../../util/helpers/ProjectHelpers';
 
 //-----------------------------------------------------------------------------------------
 //------------------------------------ Projects Component -------------------------------------
@@ -41,23 +42,7 @@ class Projects extends Component {
     return (
       <div className="projects-container">
 
-        {this.props.project.map((project,index) => {
-          return(
-            <div className="project-box" key={index}>
-              <div className="project-text">
-
-                <div>{PROJECT_TYPES[project.project_type_id - 1].name}</div>
-                <br/>
-                <div className="project-description">{project.description}</div>
-                <br />
-                <div>{`$ ${project.min_contract_value}K - ${project.min_contract_value}K`}</div>
-                <br />
-                <div>{`${project.suburb}, ${project.state}`}</div>
-
-              </div>
-            </div>
-          )
-        })}
+        {this.props.projects}
 
       </div>
     );
@@ -72,7 +57,7 @@ class Projects extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    project: state.default.project,
+    projects: projectsToDivs(state.default.projects),
   }
 }
 

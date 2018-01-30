@@ -3,14 +3,14 @@
 //-----------------------------------------------------------------------------------------
 
 import uploadcare from 'uploadcare-widget';
+import React from 'react';
 
 
 //-----------------------------------------------------------------------------------------
 //---------------------------------- Internal imports -------------------------------------
 //-----------------------------------------------------------------------------------------
 
-import { DEFAULT_UPLOADCARE_SETTINGS } from '../Constants';
-
+import { DEFAULT_UPLOADCARE_SETTINGS, PROJECT_TYPES } from '../Constants';
 
 //-----------------------------------------------------------------------------------------
 //------------- Open uploadcare dialog/modal and pass uploaded files to handler -----------
@@ -87,6 +87,33 @@ function imagesToImages(images) {
 }
 
 //-----------------------------------------------------------------------------------------
+//---------- Converts projects in redux store to divs -------------------------------------
+//-----------------------------------------------------------------------------------------
+
+function projectsToDivs(projects) {
+  console.log('projectsToDivs')
+  
+  return  projects.map((project, index) => {
+      return (
+        <div className="project-box" key={index}>
+          <div className="project-text">
+
+            <div>{PROJECT_TYPES[project.project_type_id - 1].name}</div>
+            <br />
+            <div className="project-description">{project.description}</div>
+            <br />
+            <div>{`$ ${project.min_contract_value}K - ${project.min_contract_value}K`}</div>
+            <br />
+            <div>{`${project.suburb}, ${project.state}`}</div>
+
+          </div>
+        </div>
+      )
+    })
+  
+}
+
+//-----------------------------------------------------------------------------------------
 //---------- Validates payload for empty values -------------------------------------------
 //-----------------------------------------------------------------------------------------
 
@@ -132,4 +159,5 @@ export {
   stateToPayload,
   imagesToImages,
   validatePayload,
+  projectsToDivs,
 }

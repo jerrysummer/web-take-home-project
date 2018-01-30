@@ -20,7 +20,7 @@ import projectValues from './HomeValueMenuItems';
 import Location from './LocationAutoComplete';
 import { openUploadCareDialog, imagesToFiles, stateToPayload, imagesToImages, validatePayload} from '../../util/helpers/ProjectHelpers';
 import Images from './ImagesDisplay';
-import './Dialogbox.css';
+import './DialogBox.css';
 import { addProject } from '../../util/api_calls/ProjectApiCalls'
 import { addProjectToStore } from '../../actions/ProjectActions'
 
@@ -66,7 +66,7 @@ class DialogBox extends Component {
     let validity = validatePayload(payload);
 
     if(validity.validity) {
-      addProject(payload,{},(res)=> console.log(res))
+      // addProject(payload,{},(res)=> console.log(res))
       this.props.addProjectToStore(payload);
       this.props.handleClose();
       this.clearState();
